@@ -1,0 +1,10 @@
+const routerProduct = require("express").Router();
+const ctrls = require('../controllers/Product_ctrl');
+const { verifyAccessToken } = require("../middlewares/verifyToken");
+routerProduct.post("/createProduct",ctrls.createProduct);
+routerProduct.get("/getProduct/:linkId", ctrls.getProduct);
+routerProduct.get("/getAllProduct", ctrls.getAllProduct);
+routerProduct.put("/updateProduct/:idUpdate", ctrls.updateProduct);
+routerProduct.put("/ratings",verifyAccessToken,ctrls.ratings);
+routerProduct.delete("/deleteProduct/:idDelete", ctrls.delProduct);
+module.exports = routerProduct;
