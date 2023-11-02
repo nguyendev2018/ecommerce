@@ -8,7 +8,7 @@ const dbConnect = async()=>{
         }
     } catch (error) {
         console.log(error);
-        throw new Error(error)
+        throw new Error(error);
     }
 }
 module.exports = dbConnect;
