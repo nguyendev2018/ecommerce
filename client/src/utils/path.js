@@ -1,6 +1,6 @@
 const path = {
     PUBLIC : '/',
-    HOME : '',
+    HOME : '/home',
     ALL : '*',
     LOGIN : 'login',
     BLOGS : 'blogs',

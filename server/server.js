@@ -1,9 +1,16 @@
 const express = require('express');
-const app = express();
+
 const dbConnect = require('./config/dbConnect');
 const routers = require('./routers');
+const cors = require('cors');
 require("dotenv").config();
+const app = express();
+app.use(cors({
+    origin : process.env.URL_CLIENT,
+    methods : ["POST","PUT","GET","DELETE"]
+}))
 const port = process.env.PORT || 5000;
+// là middleware được xử lý và phân tích các cookies 
 const cookiesParser = require('cookie-parser');
 app.use(express.json());
 app.use(cookiesParser());

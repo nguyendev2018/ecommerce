@@ -10,7 +10,6 @@ var userSchema = new mongoose.Schema({
     },
     slug:{
         type:String,
-        unique:true,
         lowercase : true
     },
     desc:{

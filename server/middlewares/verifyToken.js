@@ -1,4 +1,6 @@
 // xác minh thử có đúng với accessToken hay không
+//jsonwebtoken là thư viện mã hóa và giải mã 
+    //++ dùng để tạo và xác thực trong các web và di động  
 const jwt = require('jsonwebtoken');
 const asyncHandler = require("express-async-handler");
 const verifyAccessToken = asyncHandler(async(req,res,next) =>{
@@ -10,6 +12,7 @@ const verifyAccessToken = asyncHandler(async(req,res,next) =>{
         //decode ở đây có nghĩa là giá trị được truyền vào ở createAccessToken
         if(req?.headers?.authorization?.startsWith("Bearer")){
             const token = req.headers.authorization.split(' ')[1];
+            console.log(token);
             jwt.verify(token, process.env.JWT_SECRET,(err,decode)=>{
                 if(err) return res.status(401).json({
                     success : false,

@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routers, Routes } from 'react-router-dom'
 import path from './utils/path'
-import { Home, Login, Public } from './pages/public'
+import { Home, Login, Public } from './pages/public';
+import { useDispatch } from 'react-redux';
+import { getCategories } from './store/asyncAction';
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [])
+  
   return (
     <Routes>
       <Route path={path.PUBLIC} element={<Public/>}></Route>

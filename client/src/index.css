@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.button.slick-next {
+    background: #000;
+}
+button.slick-next::before {
+    color: gray;
+    content: '\276F';
+    background: #000;
+}

@@ -15,7 +15,7 @@ const createProduct = asyncHandler(async(req,res)=>{
 const getProduct =  asyncHandler(async(req,res)=>{
     const {linkId}  = req.params;
     const dataProduct = await modelProduct.findById(linkId)
-    return  res.status(200).json({
+    return res.status(200).json({
         mes : "Get product success",
         dataProduct
     })
@@ -70,7 +70,7 @@ const getAllProduct = asyncHandler (async(req,res) =>{
     
 })
 const updateProduct = asyncHandler(async(req,res)=>{
-    if(req.body.title !=="") {
+    if (typeof req.body.title === 'string' && req.body.title !== "") {
         req.body.slug = slugify(req.body.title);
     }
     const {idUpdate} = req.params;
@@ -95,15 +95,11 @@ const ratings = asyncHandler(async(req,res)=>{
     const {star,comment,productId} = req.body;
     if(!star || !productId) throw new Error("Missing Inputs");
     const ratingsProduct = await modelProduct.findById(productId);
-    
     const conditionProduct = ratingsProduct?.rating?.find(el => el.idUser.toString() === _id);
-    console.log({conditionProduct});
     if(conditionProduct) {
         console.log('false');
         console.log(conditionProduct);
         //update star and comment 
-    }
-    else {
         //add star and comment
         const response = await modelProduct.findByIdAndUpdate(productId, {
         $push : {rating : {star, comment, idUser: _id}}
