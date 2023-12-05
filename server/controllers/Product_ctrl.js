@@ -1,11 +1,11 @@
 const modelProduct  = require("../models/Product_model");
 const asyncHandler = require('express-async-handler');
-const slugify = require('slugify')
 const mongoose = require('mongoose');
+const customSlugify= require("../customSlug");
 mongoose.set('strictQuery', true);
 const createProduct = asyncHandler(async(req,res)=>{
     if(Object.keys(req.body).length == 0)  throw new Error("Missing Inputs")
-    req.body.slug = slugify(req.body.title)
+    req.body.slug = customSlugify(req.body.title)
     const newProduct = await modelProduct.create(req.body);
     return res.status(200).json({
         success : newProduct  ?true : false,
@@ -71,7 +71,7 @@ const getAllProduct = asyncHandler (async(req,res) =>{
 })
 const updateProduct = asyncHandler(async(req,res)=>{
     if (typeof req.body.title === 'string' && req.body.title !== "") {
-        req.body.slug = slugify(req.body.title);
+        req.body.slug = customSlugify(req.body.title);
     }
     const {idUpdate} = req.params;
     const productUpdate = await modelProduct.findByIdAndUpdate(idUpdate,req.body,{new : true});
@@ -79,6 +79,11 @@ const updateProduct = asyncHandler(async(req,res)=>{
         success : productUpdate ? true :false,
         dataUpdate : productUpdate ? productUpdate : "Cannot up loading Update"
     })
+})
+const updateImageProduct = asyncHandler(async(req,res)=>{
+    const {pid} = req.params;
+    if(!req.files) throw new Error('Missing Inputs');
+    const response = await modelProduct.findByIdAndUpdate(pid, {$push:{images : {$each:req.file.map(el => el.path)}}}, {new:true})
 })
 const delProduct = asyncHandler(async(req,res)=>{
     const {idDelete} = req.params;

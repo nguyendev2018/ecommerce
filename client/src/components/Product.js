@@ -4,7 +4,7 @@ const Product = ({productData}) => {
   console.log(productData);
   return (
     <div className='1/3'>
-        <img src={productData?.images[0] || ''} alt="" className='ư-full object-contain' />
+      <img src={productData?.thumb || ''} alt="" className='w-[243px] '
     </div>
   )
 }
