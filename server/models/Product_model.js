@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
     },
     color : {
         type : String,
-        enum : ['Black','Grown','Red']
+        require : true
     },
     rating : [{
         star : {type :Number},
