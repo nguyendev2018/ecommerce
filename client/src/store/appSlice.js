@@ -12,10 +12,6 @@ export const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // .addCase(action.getCategories.pending, (state) => {
-      //   state.isLoading = true;
-      //   state.errorMessage = null; // Reset errorMessage on pending
-      // })
       .addCase(action.getCategories.fulfilled, (state, action) => {
         state.isLoading = false; // Set isLoading to false on success
         state.categories = action.payload.dataCategory; // Assign payload to categories
@@ -26,6 +22,4 @@ export const appSlice = createSlice({
       });
   },
 });
-
-export const { /* Any synchronous actions */ } = appSlice.actions;
 export default appSlice.reducer;

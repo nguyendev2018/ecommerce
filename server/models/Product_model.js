@@ -12,8 +12,8 @@ var userSchema = new mongoose.Schema({
         type:String,
         lowercase : true
     },
-    desc:{
-        type:String,
+    description:{
+        type:Array,
         required:true,
     },
     brand:{
@@ -25,8 +25,8 @@ var userSchema = new mongoose.Schema({
         required : true
     },
     category : {
-        type : mongoose.Types.ObjectId,
-        ref : "Category"
+        type : String,
+        required : true
     },
     quantity : {
         type : Number,
@@ -36,12 +36,14 @@ var userSchema = new mongoose.Schema({
         type : Number,
         default : 0
     },
+    thumb : {
+        type : String
+    },
     images : {
         type : Array
     },
     color : {
-        type : String,
-        enum : ['Black','Grown','Red']
+        type : Array
     },
     rating : [{
         star : {type :Number},

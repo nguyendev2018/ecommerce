@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routers, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import path from './utils/path'
 import { Home, Login, Public } from './pages/public';
 import { useDispatch } from 'react-redux';

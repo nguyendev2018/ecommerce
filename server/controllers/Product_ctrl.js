@@ -23,6 +23,7 @@ const getProduct =  asyncHandler(async(req,res)=>{
 //Filter, sorting and pagination
 const getAllProduct = asyncHandler (async(req,res) =>{  
     const dataClone = {...req.query};
+    console.log(dataClone);
     let stringData = JSON.stringify(dataClone);
     stringData =  stringData.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     const formatQueries = JSON.parse(stringData);  

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { createSlug } from '../utils/helperFn';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';

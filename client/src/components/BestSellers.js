@@ -5,53 +5,57 @@ import Product from './Product';
 
 const tabs = [
     {id:1, name: "best seller"},
-    {id:2, name: "new arrivals"},
-    {id:3, name: "tablet"}
+    {id:2, name: "new arrivals"}
 ]
 const settings = {
-  dots: true,
-  infinite: true,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 3,
   slidesToScroll: 1
 };
 const BestSellers = () => {
-  
-
-    const [bestSellers, setBestSellers] = useState([]);
-    const [newProducts, setNewProducts] = useState([]);
+    const [bestSellers, setBestSellers] = useState(null);
+    const [newProducts, setNewProducts] = useState(null);
     const [activeTab, setActiveTab] = useState(1);
-   
+    const [product, setProducts] = useState(null);
     const fetchProducts = async () =>{
-      const response = await Promise.all([apiGetProducts({sort:'-sold'}), apiGetProducts({order:'-createAt'})]);
+      const response = await Promise.all([apiGetProducts({sort:'-sold'}), apiGetProducts({order:'-createdAt'})]);
       if(response[0]?.success){
-        setBestSellers(response[0].data)
+        setBestSellers(response[0].data);
+        setProducts(response[0].data)
       }
-      console.log(bestSellers);
       if(response[1]?.success){
-        setNewProducts(response[1].data)
+        setNewProducts(response[1].data);
+        setProducts(response[0].data)
       }
     }
     useEffect(() => {
        fetchProducts()
     }, [])
+    useEffect(() => {
+      if(activeTab === 1) {
+        setProducts(bestSellers)
+      }
+      if(activeTab === 2 ){
+        setProducts(newProducts)
+      }
+    }, [activeTab])
   return (
     <div>
         <div className='flex text-[20px] gap-8 pb-4 border-b-2 border-main'>
             {tabs.map(item =>(
                 <span 
                 key={item.id} 
-                className={`font-semibold cursor-pointer capitalize border-r text-gray-400 ${activeTab ==  item.id ? "text-black": ""}`}
+                className={`font-semibold uppercase px-8 cursor-pointer border-r text-gray-400 ${activeTab ===  item.id ? "text-gray-900": ""}`}
                 onClick={() =>{setActiveTab(item.id)}}
                 >
                     {item.name}
                 </span>
             ))}
         </div>
-        <div className="mt-5">
+        <div className="mt-4 mx-[10px] border-t-2 border-main pt-4">
         <Slider {...settings}>
-              {bestSellers?.map(el => (
-                <Product key={el.id} productData={el}></Product>
+              {product?.map(el => (
+                <Product key={el.id} productData={el} isLabel= {activeTab === 1 ? true : false}></Product>
               ))}
         </Slider>
         </div>

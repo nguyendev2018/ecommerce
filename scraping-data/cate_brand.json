@@ -1,0 +1,22 @@
+[
+    {
+        "title" : "SmartPhone",
+        "brand" : ["Apple", "Samsung", "LG", "Asus", "Nokia", "BlackBerry"]
+    },
+    {
+        "title" : "Tablet",
+        "brand" : ["iPad", "Samsung", "Acer", "Asus", "Lenovo", "Maier"]
+    },
+    {
+        "title" : "Accessories",
+        "brand" : ["Smartwatches", "Headphone", "Bluetooth", "Keyboard", "Mouse", "Cases"]
+    },
+    {
+        "title" : "Television",
+        "brand" : ["Apple", "Samsung", "LG", "Asus", "Nokia", "BlackBerry"]
+    },
+    {
+        "title" : "Printer",
+        "brand" : ["Apple", "Samsung", "LG", "Asus", "Nokia", "BlackBerry"]
+    }
+]
