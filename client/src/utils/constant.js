@@ -1,5 +1,6 @@
 import path from "./path";
 export const navigation = [
+    
     {
         id : 1,
         values : "PRODUCTS",
@@ -19,5 +20,10 @@ export const navigation = [
         id : 4,
         values : "FAQs",
         link : `/${path.FAQS}`
+    },
+    {
+        id : 5,
+        values : "HOME",
+        link : `/${path.HOME}`
     }
 ]

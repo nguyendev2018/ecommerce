@@ -24,6 +24,7 @@ const DealDaily = () => {
         setSecond(number.s)
       }
     }
+
     useEffect(() => {
       idInterval && clearInterval(idInterval)
       fetchDealDaily();
@@ -55,13 +56,15 @@ const DealDaily = () => {
   return (
     <div className='border w-full flex-auto'>
         <div className="flex items-center justify-between p-4 w-full">
-            <span className="flex-1 flex justify-center"><AiFillStar size={20} color="#DD1111"/></span>
+            <span className="flex-1 flex justify-center"><AiFillStar  size={20} color="#DD1111"/></span>
             <div className="flex-8 font-bold text-[20px] text-center text-gray-700">DEAL DAILY</div>
             <span className='flex-3'></span>
         </div>
         <div className="w-full flex flex-col items-center pt-8">
-          <img src={DealDaily?.thumb} alt="" className='w-full object-contain' />
-          <span className='flex h-4'>{renderStarFromNumber(DealDaily?.totalRatings, 20)}</span>
+          <img  src={DealDaily?.thumb} alt="" className='w-full object-contain' />
+          <span className='flex h-4'>{renderStarFromNumber(DealDaily?.totalRatings, 20)?.map((item,index)=>(
+            <span key={index}>{item}</span>
+          ))}</span>
           <span className="line-clamp-1">{DealDaily.title}</span>
         </div>
         <div className='px-4 mt-4'>

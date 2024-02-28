@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import * as action from "./asyncAction";
 
 export const appSlice = createSlice({
-  name: 'app',
+  name: 'categories',
   initialState: {
     categories: [],
     isLoading: false,
@@ -12,6 +12,9 @@ export const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(action.getCategories.pending, (state) => {
+        state.isLoading = true;
+      } )
       .addCase(action.getCategories.fulfilled, (state, action) => {
         state.isLoading = false; // Set isLoading to false on success
         state.categories = action.payload.dataCategory; // Assign payload to categories

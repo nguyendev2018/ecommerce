@@ -7,7 +7,6 @@ const FeatureProduct = () => {
     const [products, setProduct] = useState([]);
     const featureProducts = async () =>{
         const response = await apiGetProducts({limit:10, totalRatings: 5});
-        console.log(response);
         if(response.success) {
             setProduct(response.data);
         }
@@ -22,15 +21,16 @@ const FeatureProduct = () => {
             FEATURE PRODUCTS
         </h3>
         <div className="flex flex-wrap mt-[15px] mx-[-10px]">
-            {products?.map(el =>(
+            {products?.map(el => (
                 <ProductCard
-                    key={el.id}
-                    image={el.images}
-                    title={el.title}
-                    price={el.price}
-                    totalRatings={el.totalRatings}
-                    
-                />
+                key={el._id}
+                id={el._id}
+                image={el.images}
+                title={el.title}
+                price={el.price}
+                totalRatings={el.totalRatings}
+                
+            />
             ))}
         </div>
         <div className='flex justify-between gap-4'>

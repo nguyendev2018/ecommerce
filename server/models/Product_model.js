@@ -43,12 +43,8 @@ var userSchema = new mongoose.Schema({
         type : Array
     },
     color : {
-<<<<<<< HEAD
-        type : Array
-=======
         type : String,
         require : true
->>>>>>> 420a3e82298c06a1e7c05b15d117cc76331549f7
     },
     rating : [{
         star : {type :Number},

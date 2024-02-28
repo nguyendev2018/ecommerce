@@ -1,11 +1,13 @@
 const path = {
-    PUBLIC : '/',
-    HOME : '/home',
-    ALL : '*',
-    LOGIN : 'login',
-    BLOGS : 'blogs',
+    PUBLIC: '/',
+    HOME: '',
+    ALL: '*',
+    LOGIN: 'login',
+    PRODUCTS: 'products',
+    BLOGS: 'blogs',
     SERVICES : 'services',
-    FAQS : 'faqs',
+    FAQS: 'faqs',
+    DEATAIL_PRODUCTS: "product/:pid/:title"
 
 }
 export default path;

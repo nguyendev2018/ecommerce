@@ -1,35 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiGetProducts } from '../api/product';
-import Slider from "react-slick";
-import Product from './Product';
-
+import {Product, CustomerSlider} from './';
+import { getNewProducts } from '../store/products/asynsAction';
 const tabs = [
-    {id:1, name: "best seller"},
+    {id:1, name: "best seller"}, 
     {id:2, name: "new arrivals"}
 ]
-const settings = {
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1
-};
 const BestSellers = () => {
-    const [bestSellers, setBestSellers] = useState(null);
-    const [newProducts, setNewProducts] = useState(null);
+  const dispatch = useDispatch();
+    const [bestSellers, setBestSellers] = useState([]);
+    const {newProducts} = useSelector(state => state.products);
     const [activeTab, setActiveTab] = useState(1);
-    const [product, setProducts] = useState(null);
+    const [product, setProducts] = useState([]);
     const fetchProducts = async () =>{
-      const response = await Promise.all([apiGetProducts({sort:'-sold'}), apiGetProducts({order:'-createdAt'})]);
-      if(response[0]?.success){
-        setBestSellers(response[0].data);
-        setProducts(response[0].data)
-      }
-      if(response[1]?.success){
-        setNewProducts(response[1].data);
-        setProducts(response[0].data)
+      const response = await apiGetProducts({sort:'-sold'});
+      console.log(response);
+      if(response.success){
+        setBestSellers(response.data);
+        setProducts(response.data)
       }
     }
     useEffect(() => {
        fetchProducts()
+       dispatch(getNewProducts());
     }, [])
     useEffect(() => {
       if(activeTab === 1) {
@@ -52,12 +46,8 @@ const BestSellers = () => {
                 </span>
             ))}
         </div>
-        <div className="mt-4 mx-[10px] border-t-2 border-main pt-4">
-        <Slider {...settings}>
-              {product?.map(el => (
-                <Product key={el.id} productData={el} isLabel= {activeTab === 1 ? true : false}></Product>
-              ))}
-        </Slider>
+        <div className="mt-4 mx-[10px] border-t-2 border-primary pt-4">
+              <CustomerSlider products={product} activeTab={activeTab} />
         </div>
     </div>
   )

@@ -4,13 +4,13 @@ import { Header, Nav } from '../../components'
 
 const Public = () => {
   return (
-    <div className='w-full flex justify-center'>
+    <div className='w-full flex flex-col items-center'>
       <Header/>
-    <Nav/>
+      <Nav/>
       <div className='w-main'>
         <Outlet/>
       </div>
-    </div>
+    </div> 
   )
 }
 
